@@ -1,0 +1,196 @@
+// ============================================
+// PORTFOLIO CUSTOMIZATION GUIDE
+// ============================================
+
+// FILE: constants/index.ts
+// This is the ONLY file you need to edit for all content/links customization!
+
+// ============================================
+// 1. HERO SECTION - Update here:
+// ============================================
+export const HERO_DATA = {
+    badge1: "Engineering Visionary",           // ← EDIT THIS
+    badge2: "Quantum AI Enthusiast",            // ← EDIT THIS  
+    badge3: "Cybersecurity Designer",           // ← EDIT THIS
+    mainTitle: "Building the Future with",
+    highlight1: "Quantum",
+    subtitle1: "and",
+    highlight2: "Secure",
+    subtitle2: "Technology",
+    description: "Passionate engineer transforming quantum computing and post-quantum cryptography into real-world applications.", // ← EDIT THIS
+};
+
+// ============================================
+// 2. ABOUT SECTION - Update here:
+// ============================================
+export const ABOUT_DATA = {
+    name: "Your Name",  // ← EDIT TO YOUR NAME
+    title: "Engineer | Quantum AI Explorer | Creative Coder", // ← EDIT THIS
+    profileImage: "/jenin.jpg",  // ← CHANGE TO YOUR IMAGE (put file in /public folder)
+    bio: [
+        "From engineering fundamentals to quantum computing—my journey has been one of continuous innovation and exploration.",
+        "I transitioned into software development with Python and React, discovering that code is the modern language of engineering.",
+        "Beyond the terminal, I express myself through Tamil poetry, bridging the technical and the artistic.",
+        "I'm fascinated by the intersection of cybersecurity and quantum computing, building solutions that are both secure and intelligent.",
+    ]
+    // ↑ EDIT ALL BIO PARAGRAPHS ABOVE WITH YOUR ACTUAL STORY
+};
+
+// ============================================
+// 3. SKILLS BY CATEGORY - Update here:
+// ============================================
+export const SKILLS_BY_CATEGORY = {
+    languages: [
+        { skill_name: "Python", Image: "/python.png", width: 70, height: 70 },
+        { skill_name: "JavaScript", Image: "/js.png", width: 65, height: 65 },
+        { skill_name: "TypeScript", Image: "/ts.png", width: 70, height: 70 },
+        { skill_name: "HTML 5", Image: "/html.png", width: 70, height: 70 },
+        { skill_name: "CSS", Image: "/css.png", width: 70, height: 70 },
+        // ↑ ADD/REMOVE languages as needed
+    ],
+    frameworks: [
+        { skill_name: "React", Image: "/react.png", width: 75, height: 75 },
+        { skill_name: "Next.js", Image: "/next.png", width: 75, height: 75 },
+        { skill_name: "Django", Image: "/django.svg", width: 70, height: 70 },
+        { skill_name: "Tailwind CSS", Image: "/tailwind.png", width: 70, height: 70 },
+        // ↑ ADD/REMOVE frameworks as needed
+    ],
+    specialized: [
+        { skill_name: "Quantum Computing", Image: "/quantum.png", width: 70, height: 70 },
+        { skill_name: "Post-Quantum Cryptography", Image: "/crypto.png", width: 70, height: 70 },
+        { skill_name: "Cybersecurity", Image: "/security.png", width: 70, height: 70 },
+        // ↑ ADD/REMOVE specialized skills as needed
+    ],
+    core: [
+        { skill_name: "Linear Algebra", Image: "/math.png", width: 70, height: 70 },
+        { skill_name: "Calculus", Image: "/calculus.png", width: 70, height: 70 },
+        { skill_name: "Differential Equations", Image: "/diff-eq.png", width: 70, height: 70 },
+        // ↑ ADD/REMOVE core skills as needed
+    ],
+};
+
+// ============================================
+// 4. PROJECTS - UPDATE LINKS & DETAILS HERE:
+// ============================================
+export const PROJECTS_DATA = [
+    {
+        id: 1,
+        title: "Q Messenger",  // ← EDIT project title if needed
+        description: "Post-quantum secure messaging application. End-to-end encrypted communication using lattice-based cryptography for quantum resistance.", // ← EDIT description
+        image: "/q-messenger.png",  // ← PUT YOUR PROJECT IMAGE IN /public FOLDER
+        tags: ["Quantum", "Security", "React", "Post-Quantum Cryptography"],  // ← EDIT TAGS
+        githubLink: "https://github.com/YourUsername/q-messenger", // ← CHANGE THIS TO YOUR GITHUB REPO
+        liveLink: "https://q-messenger.live", // ← CHANGE THIS TO YOUR LIVE URL
+        featured: true,
+    },
+    {
+        id: 2,
+        title: "Quantum Algorithm Visualizer",
+        description: "Interactive visualization of quantum gates and algorithms. Educational tool for understanding quantum computing concepts.",
+        image: "/quantum-viz.png",
+        tags: ["Quantum", "Education", "React", "Visualization"],
+        githubLink: "https://github.com/YourUsername/quantum-viz",  // ← EDIT THIS
+        liveLink: "https://quantum-viz.vercel.app",  // ← EDIT THIS
+    },
+    {
+        id: 3,
+        title: "Cryptography Toolkit",
+        description: "Collection of modern cryptographic algorithms including classical and post-quantum encryption methods with visual explanations.",
+        image: "/crypto-toolkit.png",
+        tags: ["Cryptography", "Python", "Security", "Education"],
+        githubLink: "https://github.com/YourUsername/crypto-toolkit",  // ← EDIT THIS
+        liveLink: "https://crypto-toolkit.vercel.app",  // ← EDIT THIS
+    },
+    // ↑ ADD MORE PROJECTS BY ADDING MORE OBJECTS TO THIS ARRAY
+];
+
+// ============================================
+// 5. STARTUP (NOVA-Q) - UPDATE HERE:
+// ============================================
+export const STARTUP_DATA = {
+    name: "NOVA-Q",  // ← EDIT startup name if different
+    tagline: "Quantum-Ready Security for the Future",  // ← EDIT tagline
+    description: "A venture focused on transitioning cybersecurity infrastructure to quantum-resistant systems. Making post-quantum cryptography accessible and practical.",  // ← EDIT description
+    website: "https://nova-q.ai",  // ← CHANGE THIS TO YOUR STARTUP WEBSITE
+};
+
+// ============================================
+// 6. RESUME DOWNLOAD - UPDATE HERE:
+// ============================================
+export const RESUME_DATA = {
+    fileName: "YourName_Resume_2024.pdf",  // ← CHANGE TO YOUR PDF FILENAME
+    downloadLink: "/resume.pdf",  // ← PATH TO YOUR PDF IN /public FOLDER
+    ctaText: "Download My Resume",  // ← KEEP AS IS OR CUSTOMIZE TEXT
+};
+
+// ============================================
+// 7. SOCIAL LINKS:
+// ============================================
+export const Socials = [
+    {
+        name: "Linkedin",
+        src: "/linkedin.svg",
+        link: "https://www.linkedin.com/in/jenin-joseph/",  // ← UPDATE WITH YOUR LINKEDIN
+    },
+    {
+        name: "Github",
+        src: "/github.svg",
+        link: "https://github.com/Jenin82",  // ← UPDATE WITH YOUR GITHUB
+    },
+    {
+        name: "Twitter",  // ← OR ANY OTHER SOCIAL
+        src: "/twitter.svg",
+        link: "https://twitter.com/yourprofile",  // ← UPDATE WITH YOUR TWITTER
+    },
+];
+
+// ============================================
+// SETUP CHECKLIST:
+// ============================================
+
+/*
+  ✓ Step 1: Update HERO_DATA with your badges and description
+  ✓ Step 2: Update ABOUT_DATA with your name, title, bio, and image path
+  ✓ Step 3: Update SKILLS_BY_CATEGORY with your actual skills
+  ✓ Step 4: Update PROJECTS_DATA with your project links (GitHub, Live URLs)
+  ✓ Step 5: Update STARTUP_DATA with your startup info and website
+  ✓ Step 6: Update RESUME_DATA with your PDF filename
+  ✓ Step 7: Update Socials with your profile links
+  ✓ Step 8: Add all images/PDFs to /public folder
+  
+  FILES TO ADD TO /public FOLDER:
+  - Your resume PDF (e.g., "Resume_2024.pdf")
+  - Your profile image (e.g., "profile.jpg")
+  - Project preview images
+  - Any skill icons if you want custom ones
+*/
+
+// ============================================
+// FOLDER STRUCTURE:
+// ============================================
+/*
+portfolio/
+├── app/
+│   └── page.tsx (includes all sections)
+├── public/
+│   ├── resume.pdf          ← ADD YOUR RESUME HERE
+│   ├── profile.jpg         ← ADD YOUR PROFILE IMAGE HERE
+│   ├── python.png          ← Skill icons
+│   ├── q-messenger.png     ← Project images
+│   └── ... (other images)
+├── constants/
+│   └── index.ts            ← EDIT HERE FOR ALL CONTENT
+└── components/
+    ├── main/
+    │   ├── Hero.tsx
+    │   ├── HeroContent.tsx
+    │   ├── About.tsx
+    │   ├── Skills.tsx
+    │   ├── Projects.tsx
+    │   ├── ResumeDownload.tsx
+    │   ├── StartupShowcase.tsx
+    │   └── Navbar.tsx
+    └── sub/
+        ├── ProjectCard.tsx
+        └── ... (other components)
+*/

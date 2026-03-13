@@ -1,0 +1,13 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Blue section (top-left) -->
+  <rect x="10" y="10" width="60" height="60" rx="12" fill="#3776AB"/>
+  
+  <!-- Yellow section (bottom-right) -->
+  <rect x="50" y="50" width="60" height="60" rx="12" fill="#FFD43B"/>
+  
+  <!-- White dot in blue section -->
+  <circle cx="28" cy="28" r="5" fill="white"/>
+  
+  <!-- White dot in yellow section -->
+  <circle cx="92" cy="92" r="5" fill="white"/>
+</svg>
