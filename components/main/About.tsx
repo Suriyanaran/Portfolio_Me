@@ -1,121 +1,157 @@
 "use client";
-import React from "react";
 
+import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { slideInFromBottom, slideInFromLeft, slideInFromRight, slideInFromTop } from "@/utils/motion";
-import { InView } from "react-intersection-observer";
 import { ABOUT_DATA } from "@/constants";
+import { Shield, Bot, Code, Handshake, ExternalLink, ArrowRight } from "lucide-react";
 
 const About = () => {
+    const focusIcons: Record<string, React.ReactNode> = {
+        Building2: <Shield className="w-5 h-5 text-purple-400" />,
+        ShieldCheck: <Shield className="w-5 h-5 text-cyan-400" />,
+        Bot: <Bot className="w-5 h-5 text-indigo-400" />,
+        Handshake: <Handshake className="w-5 h-5 text-pink-400" />,
+    };
+
     return (
         <section
             id="about"
-            className="flex flex-col md:flex-row relative items-center justify-center min-h-screen w-full h-full"
+            className="flex flex-col items-center justify-center min-h-screen w-full py-20 px-4 sm:px-8 max-w-[1500px] mx-auto relative z-20"
         >
-            <div className="md:absolute w-auto h-auto md:top-[80px] z-[5]">
-                <InView triggerOnce={false}>
-                    {({ inView, ref }) => (
-                        <motion.div
-                            ref={ref}
-                            initial="hidden"
-                            animate={inView ? "visible" : "hidden"}
-                            variants={slideInFromTop}
-                            className="text-[40px] pt-[5rem] pb-3 md:p-0 font-medium text-center text-gray-200 z-50"
-                        >
-                            About
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
-                                {" "}
-                                Me{" "}
-                            </span>
-                        </motion.div>
-                    )}
-                </InView>
-            </div>
+            {/* Section Header */}
+            <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-center mb-12 sm:mb-16"
+            >
+                <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+                    About{" "}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">
+                        Me
+                    </span>
+                </h2>
+                <p className="text-gray-400 mt-3 text-base sm:text-lg max-w-xl mx-auto">
+                    Founder, engineer, and product builder focused on secure, quantum-ready, and AI-driven software.
+                </p>
+            </motion.div>
 
-            <div className="flex flex-col items-center justify-start relative md:mt-[90px] lg:mt-12 z-[20] w-auto h-auto">
-                {/* Profile Image */}
-                <InView triggerOnce={false}>
-                    {({ inView, ref }) => (
-                        <motion.div
-                            ref={ref}
-                            initial="hidden"
-                            animate={inView ? "visible" : "hidden"}
-                            variants={slideInFromLeft(0.5)}
-                            className="flex flex-col items-center w-auto h-auto rounded-full overflow-hidden border-[6px] border-[#7042f88b] bg-gradient-to-r from-purple-500 to-cyan-500"
-                        >
-                            <img src={ABOUT_DATA.profileImage} alt="profile" width={250} />
-                        </motion.div>
-                    )}
-                </InView>
+            {/* Main Content Grid: Left Profile Card, Right Bio & Pillars */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start w-full">
+                {/* Left Card: Profile Image & Founder Badge */}
+                <motion.div
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="lg:col-span-5 flex flex-col items-center text-center p-8 rounded-2xl border border-[#7042f88b] bg-gradient-to-b from-[#0e072b]/90 to-[#030014]/90 backdrop-blur-md shadow-xl shadow-[#2A0E61]/30 relative overflow-hidden"
+                >
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
-                {/* Name Badge */}
-                <InView triggerOnce={false}>
-                    {({ inView, ref }) => (
-                        <motion.div
-                            ref={ref}
-                            initial="hidden"
-                            animate={inView ? "visible" : "hidden"}
-                            variants={slideInFromRight(0.5)}
-                            className="Welcome-box px-[15px] py-[8px] z-[20] brder my-[20px] border-[#7042f88b] opacity-[0.9]"
-                        >
-                            <h1 className="Welcome-text text-[20px] font-bold">
-                                {ABOUT_DATA.name}
-                            </h1>
-                        </motion.div>
-                    )}
-                </InView>
+                    {/* Profile Image with Glowing Ring */}
+                    <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-purple-500/80 p-1.5 shadow-2xl shadow-purple-600/40 mb-6 bg-gradient-to-tr from-purple-900 to-cyan-900">
+                        <Image
+                            src={ABOUT_DATA.profileImage}
+                            alt={ABOUT_DATA.name}
+                            width={240}
+                            height={240}
+                            className="rounded-full object-cover w-full h-full"
+                            priority
+                        />
+                    </div>
 
-                {/* Title */}
-                <InView triggerOnce={false}>
-                    {({ inView, ref }) => (
-                        <motion.div
-                            ref={ref}
-                            initial="hidden"
-                            animate={inView ? "visible" : "hidden"}
-                            variants={slideInFromRight(0.6)}
-                            className="text-gray-300 text-center text-sm md:text-base mb-6"
-                        >
-                            {ABOUT_DATA.title}
-                        </motion.div>
-                    )}
-                </InView>
+                    {/* Name & Title */}
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white mb-1">
+                        {ABOUT_DATA.name}
+                    </h3>
+                    <div className="px-3.5 py-1 rounded-full bg-purple-950/70 border border-purple-500/40 text-purple-300 text-xs sm:text-sm font-semibold mb-4">
+                        {ABOUT_DATA.title}
+                    </div>
 
-                {/* Bio Paragraphs */}
-                <InView triggerOnce={false}>
-                    {({ inView, ref }) => (
-                        <motion.div
-                            ref={ref}
-                            initial="hidden"
-                            animate={inView ? "visible" : "hidden"}
-                            variants={slideInFromBottom}
-                            className="Welcome-box px-[20px] w-[90%] md:w-3/4 lg:w-2/3 py-[20px] z-[20] mb-[20px] border-[#7042f88b] opacity-[0.9]"
+                    <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                        Leading engineering at{" "}
+                        <a
+                            href="https://www.ezhaq.in/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-cyan-400 font-semibold hover:underline inline-flex items-center gap-1"
                         >
-                            <div className="space-y-4">
-                                {ABOUT_DATA.bio.map((paragraph, idx) => (
-                                    <p key={idx} className="Welcome-text text-[16px] w-full text-justify leading-relaxed text-gray-300">
-                                        {paragraph}
-                                    </p>
-                                ))}
+                            EZHA-Q Technologies
+                            <ExternalLink className="w-3 h-3" />
+                        </a>
+                        , creating secure communication platforms and AI workflows.
+                    </p>
+
+                    {/* Quick Availability Badge */}
+                    <div className="w-full py-3 px-4 rounded-xl border border-emerald-500/30 bg-emerald-950/20 text-emerald-300 text-xs font-medium flex items-center justify-center gap-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>Open for Collaborations & Freelance Projects</span>
+                    </div>
+                </motion.div>
+
+                {/* Right Card: Explicit Bio Statements & Core Focus Areas */}
+                <motion.div
+                    initial={{ opacity: 0, x: 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="lg:col-span-7 flex flex-col gap-6"
+                >
+                    {/* Bio Box */}
+                    <div className="p-7 sm:p-9 rounded-2xl border border-[#7042f88b] bg-[#0c0828]/80 backdrop-blur-md shadow-lg shadow-[#7042f81a]">
+                        <h4 className="text-lg font-semibold text-purple-300 uppercase tracking-wider text-xs mb-4">
+                            Background & Vision
+                        </h4>
+                        <div className="space-y-3.5 text-gray-200 text-base sm:text-lg leading-relaxed">
+                            {ABOUT_DATA.paragraphs.map((paragraph, idx) => (
+                                <p key={idx} className="text-gray-300">
+                                    {paragraph}
+                                </p>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Focus Pillars Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {ABOUT_DATA.highlights.map((item, idx) => (
+                            <div
+                                key={idx}
+                                className="p-5 rounded-xl border border-gray-800/80 bg-[#070519]/70 hover:border-purple-500/50 hover:bg-[#0f0b33]/60 transition-all duration-300 flex flex-col gap-2"
+                            >
+                                <div className="flex items-center gap-2.5">
+                                    <div className="p-2 rounded-lg bg-purple-950/50 border border-purple-500/30">
+                                        {focusIcons[item.icon] || <Code className="w-5 h-5 text-purple-400" />}
+                                    </div>
+                                    <h5 className="font-semibold text-white text-sm sm:text-base">
+                                        {item.title}
+                                    </h5>
+                                </div>
+                                <p className="text-xs sm:text-sm text-gray-400 leading-normal">
+                                    {item.description}
+                                </p>
                             </div>
-                        </motion.div>
-                    )}
-                </InView>
+                        ))}
+                    </div>
 
-                {/* Call to Action */}
-                <InView triggerOnce={false}>
-                    {({ inView, ref }) => (
-                        <motion.a
-                            ref={ref}
-                            initial="hidden"
-                            animate={inView ? "visible" : "hidden"}
+                    {/* Action Row */}
+                    <div className="flex flex-wrap items-center gap-4 pt-2">
+                        <a
                             href="#projects"
-                            variants={slideInFromBottom}
-                            className="py-3 px-8 button-primary text-center text-white cursor-pointer rounded-lg z-40 bg-gradient-to-r from-purple-500 to-cyan-500 font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
+                            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-semibold text-sm sm:text-base hover:opacity-95 shadow-lg shadow-purple-600/30 transition-all"
                         >
-                            See My Work
-                        </motion.a>
-                    )}
-                </InView>
+                            <span>Explore Featured Projects</span>
+                            <ArrowRight className="w-4 h-4" />
+                        </a>
+                        <a
+                            href="#contact"
+                            className="flex items-center gap-2 px-6 py-3 rounded-xl border border-purple-500/50 bg-[#030014]/60 text-purple-200 font-semibold text-sm sm:text-base hover:bg-purple-950/40 hover:text-white transition-all"
+                        >
+                            <span>Let&apos;s Connect</span>
+                        </a>
+                    </div>
+                </motion.div>
             </div>
         </section>
     );

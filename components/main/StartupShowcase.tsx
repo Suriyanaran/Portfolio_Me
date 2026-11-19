@@ -2,141 +2,102 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { InView } from "react-intersection-observer";
-import { slideInFromTop, slideInFromLeft, slideInFromRight } from "@/utils/motion";
-import { Lightbulb, Target, Zap, ExternalLink } from "lucide-react";
+import { ExternalLink, ShieldCheck, Sparkles, ArrowRight } from "lucide-react";
 import { STARTUP_DATA } from "@/constants";
 
 const StartupShowcase = () => {
     return (
-        <section id="startup" className="flex flex-col items-center justify-center py-20 px-5 relative overflow-hidden">
-            {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-transparent to-cyan-500/10 pointer-events-none"></div>
+        <section
+            id="startup"
+            className="flex flex-col items-center justify-center py-20 px-4 sm:px-8 max-w-[1500px] mx-auto z-20 relative overflow-hidden"
+        >
+            <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-center mb-12"
+            >
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-3">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    Founder Venture
+                </div>
+                <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+                    Building{" "}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400">
+                        EZHA-Q Technologies
+                    </span>
+                </h2>
+                <p className="text-gray-400 mt-3 text-base sm:text-lg max-w-2xl mx-auto">
+                    {STARTUP_DATA.tagline}
+                </p>
+            </motion.div>
 
-            <InView triggerOnce={false}>
-                {({ inView, ref }) => (
-                    <motion.div
-                        ref={ref}
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"}
-                        variants={slideInFromTop}
-                        className="text-center z-10 mb-12"
-                    >
-                        <h2 className="text-[40px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 mb-4">
-                            My Startup Venture
-                        </h2>
-                        <p className="text-gray-400 text-lg">
-                            Building the future of secure technology
+            {/* Venture Card */}
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+                className="w-full max-w-4xl p-8 sm:p-12 rounded-3xl border border-cyan-500/50 bg-gradient-to-br from-[#0c0828]/95 via-[#060a22]/90 to-[#030014]/95 backdrop-blur-md shadow-2xl shadow-cyan-950/40 relative overflow-hidden"
+            >
+                <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div className="flex flex-col gap-6 relative z-10">
+                    <div>
+                        <span className="text-sm font-semibold text-cyan-400 uppercase tracking-widest">
+                            Official Venture
+                        </span>
+                        <h3 className="text-3xl sm:text-4xl font-extrabold text-white mt-1 mb-3">
+                            {STARTUP_DATA.name}
+                        </h3>
+                        <p className="text-gray-300 text-base sm:text-lg leading-relaxed max-w-3xl">
+                            {STARTUP_DATA.description}
                         </p>
-                    </motion.div>
-                )}
-            </InView>
+                    </div>
 
-            {/* Main Startup Card */}
-            <InView triggerOnce={false}>
-                {({ inView, ref }) => (
-                    <motion.div
-                        ref={ref}
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"}
-                        variants={slideInFromLeft(0.3)}
-                        className="max-w-4xl w-full relative z-10"
-                    >
-                        <div className="rounded-2xl border-2 border-blue-500 p-8 md:p-12 bg-gradient-to-br from-[#0300145e] to-[#0a0033]/30 backdrop-blur-sm hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300">
-                            {/* Startup Info */}
-                            <div className="mb-8">
-                                <h3 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-2">
-                                    {STARTUP_DATA.name}
-                                </h3>
-                                <p className="text-xl text-gray-300 font-semibold mb-4">
-                                    {STARTUP_DATA.tagline}
-                                </p>
-                                <p className="text-gray-400 text-lg leading-relaxed">
-                                    {STARTUP_DATA.description}
+                    {/* Focus Pillars */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-gray-800/80">
+                        {STARTUP_DATA.pillars.map((pillar, idx) => (
+                            <div
+                                key={idx}
+                                className="p-4 rounded-xl bg-[#090b20]/70 border border-gray-800 flex flex-col gap-2"
+                            >
+                                <div className="flex items-center gap-2">
+                                    <ShieldCheck className="w-4 h-4 text-cyan-400" />
+                                    <h4 className="font-bold text-white text-sm">
+                                        {pillar.title}
+                                    </h4>
+                                </div>
+                                <p className="text-xs text-gray-400 leading-relaxed">
+                                    {pillar.desc}
                                 </p>
                             </div>
+                        ))}
+                    </div>
 
-                            {/* Features Grid */}
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                                <div className="flex flex-col items-start gap-3 p-4 rounded-lg bg-[#001a33]/50 border border-blue-500/30">
-                                    <Lightbulb className="w-6 h-6 text-blue-400" />
-                                    <h4 className="font-bold text-white">Innovation</h4>
-                                    <p className="text-sm text-gray-400">
-                                        Cutting-edge quantum-safe cryptography solutions
-                                    </p>
-                                </div>
+                    {/* Actions */}
+                    <div className="flex flex-wrap items-center gap-4 pt-4">
+                        <a
+                            href={STARTUP_DATA.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold text-sm sm:text-base hover:opacity-95 shadow-lg shadow-cyan-500/25 transition-all"
+                        >
+                            <span>Visit www.ezhaq.in</span>
+                            <ExternalLink className="w-4 h-4" />
+                        </a>
 
-                                <div className="flex flex-col items-start gap-3 p-4 rounded-lg bg-[#001a33]/50 border border-blue-500/30">
-                                    <Target className="w-6 h-6 text-blue-400" />
-                                    <h4 className="font-bold text-white">Mission</h4>
-                                    <p className="text-sm text-gray-400">
-                                        Making PQC accessible for enterprises
-                                    </p>
-                                </div>
-
-                                <div className="flex flex-col items-start gap-3 p-4 rounded-lg bg-[#001a33]/50 border border-blue-500/30">
-                                    <Zap className="w-6 h-6 text-blue-400" />
-                                    <h4 className="font-bold text-white">Impact</h4>
-                                    <p className="text-sm text-gray-400">
-                                        Securing the quantum computing era
-                                    </p>
-                                </div>
-                            </div>
-
-                            {/* CTA Button */}
-                            <div className="flex gap-4 pt-6 border-t border-blue-500/20">
-                                <a
-                                    href={STARTUP_DATA.website}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300"
-                                >
-                                    Visit Website
-                                    <ExternalLink className="w-4 h-4" />
-                                </a>
-                                <a
-                                    href="#projects"
-                                    className="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-blue-500 text-blue-400 font-bold hover:bg-blue-500/10 transition-all duration-300"
-                                >
-                                    See Our Products
-                                </a>
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-            </InView>
-
-            {/* Stats Section */}
-            <InView triggerOnce={false}>
-                {({ inView, ref }) => (
-                    <motion.div
-                        ref={ref}
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"}
-                        variants={slideInFromRight(0.5)}
-                        className="mt-16 max-w-3xl w-full z-10"
-                    >
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            {[
-                                { label: "Founded", value: "2024" },
-                                { label: "Status", value: "Active" },
-                                { label: "Focus Area", value: "Quantum Safe" },
-                                { label: "Team Size", value: "3+" },
-                            ].map((stat, idx) => (
-                                <div
-                                    key={idx}
-                                    className="text-center p-4 rounded-lg border border-[#7042f88b] bg-[#0300145e]"
-                                >
-                                    <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-                                        {stat.value}
-                                    </p>
-                                    <p className="text-gray-400 text-sm mt-2">{stat.label}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </motion.div>
-                )}
-            </InView>
+                        <a
+                            href="#contact"
+                            className="flex items-center gap-2 px-6 py-3 rounded-xl border border-cyan-500/40 text-cyan-200 font-semibold text-sm sm:text-base hover:bg-cyan-950/40 transition-all"
+                        >
+                            <span>Contact EZHA-Q</span>
+                            <ArrowRight className="w-4 h-4" />
+                        </a>
+                    </div>
+                </div>
+            </motion.div>
         </section>
     );
 };

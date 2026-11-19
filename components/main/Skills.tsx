@@ -1,110 +1,86 @@
 "use client";
 
-import {
-    SKILLS_BY_CATEGORY,
-} from "@/constants";
 import React from "react";
-import SkillDataProvider from "../sub/SkillDataProvider";
+import { VERIFIED_SKILLS } from "@/constants";
 import SkillText from "../sub/SkillText";
-import { InView } from "react-intersection-observer";
-import { slideInFromLeft, slideInFromRight } from "@/utils/motion";
 import { motion } from "framer-motion";
-import { Code2, Boxes, Zap } from "lucide-react";
-
-interface SkillCategory {
-    skill_name: string;
-    Image: string;
-    width: number;
-    height: number;
-}
-
-interface CategorizedSkills {
-    languages: SkillCategory[];
-    frameworks: SkillCategory[];
-    specialized: SkillCategory[];
-    core: SkillCategory[];
-}
+import {
+    Layout,
+    Server,
+    ShieldCheck,
+    Bot,
+    Wrench,
+    CheckCircle2,
+} from "lucide-react";
 
 const Skills = () => {
-    const skillCategories: Array<{
-        name: string;
-        icon: React.ReactNode;
-        skills: SkillCategory[];
-        color: string;
-    }> = [
-        {
-            name: "Languages",
-            icon: <Code2 className="w-6 h-6" />,
-            skills: SKILLS_BY_CATEGORY.languages,
-            color: "from-blue-500 to-cyan-500",
-        },
-        {
-            name: "Frameworks",
-            icon: <Boxes className="w-6 h-6" />,
-            skills: SKILLS_BY_CATEGORY.frameworks,
-            color: "from-purple-500 to-pink-500",
-        },
-        {
-            name: "Specialized",
-            icon: <Zap className="w-6 h-6" />,
-            skills: SKILLS_BY_CATEGORY.specialized,
-            color: "from-orange-500 to-red-500",
-        },
-    ];
+    const categoryIcons: Record<string, React.ReactNode> = {
+        "Frontend Development": <Layout className="w-5 h-5 text-cyan-400" />,
+        "Backend & APIs": <Server className="w-5 h-5 text-purple-400" />,
+        "Security & Post-Quantum Cryptography": (
+            <ShieldCheck className="w-5 h-5 text-emerald-400" />
+        ),
+        "AI & Product Workflows": <Bot className="w-5 h-5 text-amber-400" />,
+        "Deployment & Developer Tools": <Wrench className="w-5 h-5 text-pink-400" />,
+    };
 
     return (
         <section
             id="skills"
-            className="flex flex-col items-center justify-center gap-3 h-fit relative overflow-hidden py-20"
+            className="flex flex-col items-center justify-center relative overflow-hidden py-20 px-4 sm:px-8 max-w-[1500px] mx-auto z-20"
         >
             <SkillText />
 
-            <div className="flex flex-col items-center justify-center w-[95%] gap-8">
-                {skillCategories.map((category, categoryIdx) => (
-                    <div key={categoryIdx} className="w-full">
-                        <InView triggerOnce={false}>
-                            {({ inView, ref }) => (
-                                <motion.div
-                                    ref={ref}
-                                    initial="hidden"
-                                    animate={inView ? "visible" : "hidden"}
-                                    variants={slideInFromLeft(0.3 + categoryIdx * 0.1)}
-                                    className="flex items-center gap-3 mb-6"
-                                >
-                                    <div className={`p-3 rounded-lg bg-gradient-to-r ${category.color} text-white`}>
-                                        {category.icon}
-                                    </div>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
-                                        {category.name}
-                                    </h3>
-                                </motion.div>
-                            )}
-                        </InView>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                {VERIFIED_SKILLS.map((group, groupIdx) => (
+                    <motion.div
+                        key={groupIdx}
+                        initial={{ opacity: 0, y: 25 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: groupIdx * 0.08 }}
+                        className={`flex flex-col p-6 rounded-2xl border border-gray-800/80 bg-gradient-to-b from-[#0c0828]/90 to-[#030014]/90 backdrop-blur-md shadow-lg hover:border-purple-500/50 hover:shadow-purple-500/20 transition-all duration-300 group ${
+                            groupIdx === 2 ? "md:col-span-2 lg:col-span-1" : ""
+                        }`}
+                    >
+                        {/* Category Header */}
+                        <div className="flex items-center gap-3 mb-3">
+                            <div className="p-2.5 rounded-xl bg-[#130f3a] border border-gray-700/60 group-hover:scale-110 transition-transform">
+                                {categoryIcons[group.category] || (
+                                    <CheckCircle2 className="w-5 h-5 text-purple-400" />
+                                )}
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-bold text-white group-hover:text-purple-300 transition-colors">
+                                    {group.category}
+                                </h3>
+                                <p className="text-xs text-gray-400 mt-0.5">
+                                    {group.description}
+                                </p>
+                            </div>
+                        </div>
 
-                        <InView triggerOnce={false}>
-                            {({ inView, ref }) => (
-                                <motion.div
-                                    ref={ref}
-                                    initial="hidden"
-                                    animate={inView ? "visible" : "hidden"}
-                                    variants={slideInFromLeft(0.5 + categoryIdx * 0.1)}
-                                    className="rounded-lg text-white w-full py-6 px-6 border border-[#7042f88b] opacity-[0.9]"
+                        <div className="w-full h-px bg-gradient-to-r from-purple-500/30 via-cyan-500/20 to-transparent my-3"></div>
+
+                        {/* Skills Chips */}
+                        <div className="flex flex-wrap gap-2.5 mt-2">
+                            {group.skills.map((skill, sIdx) => (
+                                <div
+                                    key={sIdx}
+                                    className="flex flex-col px-3 py-1.5 rounded-lg bg-[#07051a] border border-gray-800 hover:border-purple-500/60 hover:bg-[#120e36] transition-all"
                                 >
-                                    <div className="flex flex-row justify-around flex-wrap gap-5 items-center">
-                                        {category.skills.map((skill, index) => (
-                                            <SkillDataProvider
-                                                key={index}
-                                                src={skill.Image}
-                                                width={skill.width}
-                                                height={skill.height}
-                                                index={index}
-                                            />
-                                        ))}
-                                    </div>
-                                </motion.div>
-                            )}
-                        </InView>
-                    </div>
+                                    <span className="text-sm font-semibold text-gray-200">
+                                        {skill.name}
+                                    </span>
+                                    {skill.tag && (
+                                        <span className="text-[10px] text-gray-400 font-medium tracking-tight">
+                                            {skill.tag}
+                                        </span>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
                 ))}
             </div>
         </section>

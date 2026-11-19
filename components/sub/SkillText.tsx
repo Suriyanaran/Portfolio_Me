@@ -1,47 +1,35 @@
 "use client";
+
 import React from "react";
 import { motion } from "framer-motion";
-import {
-	slideInFromLeft,
-    slideInFromRight,
-    slideInFromTop,
-} from "@/utils/motion";
-import { InView } from "react-intersection-observer";
 
 const SkillText = () => {
     return (
-        <div className="w-full h-auto pt-20 flex flex-col items-center justify-center">
-            <InView triggerOnce={false}>
-                {({ inView, ref }) => (
-                    <motion.div
-                        ref={ref}
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"}
-                        variants={slideInFromTop}
-                        className="text-[40px] pt-[5rem] pb-3 md:p-0 font-medium text-center text-gray-200 z-50"
-                    >
-                        My
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
-                            {" "}
-                            Skills{" "}
-                        </span>
-                    </motion.div>
-                )}
-            </InView>
+        <div className="w-full h-auto flex flex-col items-center justify-center mb-12">
+            <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-center"
+            >
+                <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+                    Technical{" "}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">
+                        Skills
+                    </span>
+                </h2>
+            </motion.div>
 
-            <InView triggerOnce={false}>
-                {({ inView, ref }) => (
-                    <motion.div
-                        ref={ref}
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"}
-                        variants={slideInFromLeft(0.5)}
-                        className="cursive text-[20px] text-gray-200 mb-10 mt-[10px] text-center"
-                    >
-                        Never miss a task, deadline or idea
-                    </motion.div>
-                )}
-            </InView>
+            <motion.p
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+                className="text-gray-400 mt-3 text-base sm:text-lg text-center max-w-2xl px-4"
+            >
+                Hands-on competencies I actively apply and defend in production architectures
+            </motion.p>
         </div>
     );
 };
